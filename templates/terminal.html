@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Otsile Trading Terminal</title>
+<link rel="stylesheet" href="/static/app.css"><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4"></script></head>
+<body><header><div class="brand"><img src="/static/logo.svg"><span>OTSILE <b>TRADING</b></span></div><div class="top"><span class="status">{{"LIVE" if live else "PAPER"}}</span><span>{{username}}</span><a href="/logout">Logout</a></div></header>
+<main class="layout">
+<aside class="sidebar"><h3>Market Watch</h3><div id="watch"></div><div class="add"><input id="newSymbol" placeholder="Symbol"><button onclick="addSymbol()">+</button></div>
+<h3>Account</h3><div id="account" class="account"></div></aside>
+<section class="workspace"><div class="toolbar"><select id="symbol" onchange="loadAll()"><option>AAPL</option><option>MSFT</option><option>NVDA</option><option>TSLA</option><option>SPY</option><option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option><option>XAUUSD</option><option>BTCUSD</option></select>
+<select id="tf" onchange="loadChart()"><option value="5m">5m</option><option value="15m">15m</option><option value="1h">1h</option><option value="4h">4h</option><option value="1D">1D</option></select><button onclick="loadAll()">Refresh</button></div>
+<div class="chartbox"><canvas id="chart"></canvas></div>
+<div class="ticket"><h3>Order Ticket</h3><div class="grid">
+<label>Side<select id="side"><option>buy</option><option>sell</option></select></label>
+<label>Type<select id="type"><option>market</option><option>limit</option></select></label>
+<label>Quantity<input id="qty" type="number" step="0.0001" value="1"></label>
+<label>Limit Price<input id="price" type="number" step="0.00001"></label>
+<label>Stop Loss<input id="sl" type="number" step="0.00001"></label>
+<label>Take Profit<input id="tp" type="number" step="0.00001"></label>
+</div><button class="buy" onclick="sendOrder()">Place Buy</button><button class="sell" onclick="sendSell()">Place Sell</button><span id="msg"></span></div>
+<div class="panels"><div><h3>Open Positions</h3><div id="positions"></div></div><div><h3>Orders & History</h3><div id="orders"></div></div></div>
+</section></main><footer>Otsile Trading • Web terminal • Do not expose broker API keys in browser code.</footer>
+<script src="/static/app.js"></script></body></html>
